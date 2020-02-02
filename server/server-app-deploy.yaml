@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-server-app-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-server-app
+  template:
+    metadata:
+      labels:
+        app: log-server-app
+    spec:
+      containers:
+      - image: log-server-kubernetes-app:v9
+        name: container1
+        ports:
+        - containerPort: 5000
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: server-side-configs

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: log-backend-service
+spec:
+  ports:
+  - port: 5000
+    targetPort: 5000
+  selector:
+    app: log-server-app
+  type: LoadBalancer

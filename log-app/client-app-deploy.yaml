@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-client-app-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: log-client-app
+  template:
+    metadata:
+      labels:
+        app: log-client-app
+    spec:
+      containers:
+      - image: log-client-kubernetes-app:latest
+        name: container1
+        imagePullPolicy: IfNotPresent
