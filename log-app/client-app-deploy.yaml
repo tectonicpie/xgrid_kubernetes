@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: log-client-app-deploy
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: log-client-app
@@ -16,3 +16,10 @@ spec:
       - image: log-client-kubernetes-app:latest
         name: container1
         imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

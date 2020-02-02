@@ -18,6 +18,13 @@ spec:
         ports:
         - containerPort: 5000
         imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
         envFrom:
         - configMapRef:
             name: server-side-configs

@@ -9,6 +9,10 @@ spec:
   - name: log-mongo-vol
     persistentVolumeClaim:
       claimName: log-pvc
+  - name: init-data
+    hostPath:
+      path: "/mnt/data"
+      type: DirectoryOrCreate  
   containers:
   - image: mongo
     name: container1
@@ -16,8 +20,24 @@ spec:
     - mongod
     - "--bind_ip"
     - "0.0.0.0"
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "250m"
+      limits:
+        memory: "1024Mi"
+        cpu: "500m"
     ports:
     - containerPort: 27017
     volumeMounts:
     - name: log-mongo-vol
       mountPath: /data/db
+  initContainers:
+  - name: log-ip
+    image: busybox
+    securityContext:
+      privileged: true
+    command: ["sh","-c","date >> /data/iplogs.txt; hostname -i >> /data/iplogs.txt"]
+    volumeMounts:
+    - name: init-data
+      mountPath: "/data"
