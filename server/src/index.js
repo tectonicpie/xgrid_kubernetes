@@ -9,7 +9,7 @@ const app = express();
 app.use(cors({ origin: true }));
 const port = 5000;
 console.log(process.env.MONGODB_URL);
-const mongo_uri = process.env.MONGODB_URL || "mongodb+srv://gcp:Casual123@cluster0-gpzbx.gcp.mongodb.net/shaadi_album?retryWrites=true";;
+const mongo_uri = process.env.MONGODB_URL || "mongodb://log-mongo-service:27017/log-k8s";
 mongoose.connect(mongo_uri, {
     useNewUrlParser: true,
     useCreateIndex: true,
